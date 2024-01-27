@@ -6,4 +6,8 @@ Esta biblioteca fornece uma série de classes para facilitar a execução de ope
 
 ### `DbActions` - Classe principal para execução de ações no banco de dados
 
-#### Método `Execute<T>`
+#### Método `Execute<T>` - Executa uma consulta no banco de dados e retorna os resultados formatados como uma lista de objetos do tipo especificado.
+
+```C#
+  Execute<T>(string sql, Dictionary<string, object>? bindParams, DbConnection connection);
+```
