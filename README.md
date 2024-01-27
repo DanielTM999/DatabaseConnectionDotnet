@@ -8,6 +8,6 @@ Esta biblioteca fornece uma série de classes para facilitar a execução de ope
 
 #### Método `Execute<T>` - Executa uma consulta no banco de dados e retorna os resultados formatados como uma lista de objetos do tipo especificado.
 
-```dotnet
+C#```
     Execute<T>(string sql, Dictionary<string, object>? bindParams, DbConnection connection);
 ```
