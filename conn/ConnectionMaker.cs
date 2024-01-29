@@ -30,7 +30,7 @@ namespace DatabaseConnection.conn
             {
                 case DbTypes.SqlServer:
                     nomeDaClasse = "Microsoft.Data.SqlClient.SqlConnection";
-                    Assembly assemblySqlServer = Assembly.Load("Microsoft.Data.SqlClient");
+                    Assembly assemblySqlServer = CarregarAssemblyComVerificacao("Microsoft.Data.SqlClient");
                     tipoDaClasse = assemblySqlServer.GetType(nomeDaClasse);
                     break;
 

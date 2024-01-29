@@ -16,6 +16,7 @@ namespace DatabaseConnection.conn
 {
     public class DbActions : ConnectionMaker, IDbAction
     {
+        private bool _log;
         public List<T> Execute<T>(string sql, Dictionary<string, object>? bindParams, DbConnection connection) where T : new()
         {
             List<Dictionary<string, object?>> results = new List<Dictionary<string, object?>>();
@@ -31,7 +32,11 @@ namespace DatabaseConnection.conn
         {
             return NoReturn(sql, bindParams, connection);
         }
-        
+        public void enableLog(bool log)
+        {
+            _log = log;
+        }
+
         private List<Dictionary<string, object?>> queryRes(string sql, Dictionary<string, object>? bindParams, DbConnection connection)
         {
             List<Dictionary<string, object?>> results = new List<Dictionary<string, object?>>();
@@ -123,6 +128,7 @@ namespace DatabaseConnection.conn
                 props.ForEach(p =>
                 {
                     string key = atributeName(p);
+                    Logger.InfoLog($"PropName= {key}", _log, this);
                     if (isTerminal(p))
                     {
                         if (result[i].TryGetValue(key, out var value))
@@ -159,7 +165,8 @@ namespace DatabaseConnection.conn
             var props = classe.GetProperties().ToList<PropertyInfo>();
             props.ForEach(p =>
             {
-                string key = p.Name.ToLower();
+                string key = atributeName(p);
+                Logger.InfoLog(key, _log, this);
                 if (isTerminal(p))
                 {
                     if (res.TryGetValue(key, out var value))
@@ -213,7 +220,7 @@ namespace DatabaseConnection.conn
             var atribute = p.GetCustomAttribute(typeof(PropName)) as PropName;
             if(atribute == null)
             {
-                return p.Name.ToLower();
+                return p.Name;
             }
             else
             {

@@ -12,5 +12,7 @@ namespace DatabaseConnection.core
         List<T> Execute<T>(string sql, Dictionary<string, object>? bindParams, DbConnection connection) where T : new();
         List<Dictionary<string, object?>> ExecuteNoFormat(string sql, Dictionary<string, object>? bindParams, DbConnection connection);
         bool ExecuteNoResponse(string sql, Dictionary<string, object>? bindParams, DbConnection connection);
+
+        void enableLog(bool log);
     }
 }
